@@ -1,0 +1,192 @@
+====================================================
+Use Line Renderer to draw lines
+----------------------------------------------------
+Properties
+Materials	The first material from this list is used to render the lines.
+Positions	Array of Vector3 points to connect.
+Size	The number of segments in this line.
+Parameters	List of parameters for each line:
+StartWidth	Width at the first line position.
+EndWidth	Width at the last line position.
+Start Color	Color at the first line position.
+End Color	Color at the last line position.
+Use World Space	If enabled, the object's position is ignored, and the lines are rendered around world origin.
+Details
+To create a line renderer:
+
+Choose GameObject->Create Empty
+Choose Component->Miscellaneous->Line Renderer
+Drag a texture or Material on the Line Renderer. It looks best if you use a particle shader in the Material.
+Hints
+Line Renderers are good to use for effects when you need to lay out all the vertices in one frame.
+The lines may seem to rotate as you move the Camera. This is intentional.
+The Line Renderer should be the only Renderer on a GameObject.
+====================================================
+Load image file into Unity at run time
+----------------------------------------------------
+    // Load a .jpg or .png file by adding .txt extensions to the file
+    // and dragging it on the imageTextAsset
+    var imageTextAsset : TextAsset;
+    function Start () {
+        var tex = new Texture2D (4, 4);
+        tex.LoadImage(imageTextAsset.bytes);
+        renderer.material.mainTexture = tex;
+    }
+
+====================================================
+Message box for the purpose of Catching Errors
+----------------------------------------------------
+
+ if (transforms.Length > 0 &&
+                EditorUtility.DisplayDialog("Place Selection On Surface?",
+                "Are you sure you want to place " + transforms.Length
+                + " on the surface?", "Place", "Do Not Place"))
+
+====================================================
+Hide part of terrain (make it transparent):
+----------------------------------------------------
+Set alphamap 
+
+====================================================
+Change camera view from perspective to orthographic:
+----------------------------------------------------
+ camera.orthographic = true;
+ 
+ The orthographicSize property of your camera actually is the correct value to change in order to zoom in and out when your camera is in orthographic mode.
+ 
+ Make the change in orthographic size more gradual, it doesn't need to be whole numbers. Also you can multiply the change by deltatime to make the zoom relative to real time rather than number of cycles.
+
+zoomTimePassed += Time.deltaTime;
+
+float t = zoomTimePassed / TOTAL_ZOOM_TIME;
+
+camera.main.orthograhicSize = Mathf.SmoothStep(initialZoom, newZoom, t);
+ 
+
+public class ZoomTest : MonoBehaviour {
+
+    public int zoom = 1;
+    public int normal = 60;
+    public float smooth = 5;
+    private bool isZoomed = false;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        if (Input.GetKeyDown("z"))
+        {
+            isZoomed = !isZoomed;
+        }
+
+        if (isZoomed == true)
+        {
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, zoom, Time.deltaTime * smooth);
+        }
+        else
+        {
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, normal, Time.deltaTime * smooth);
+        }
+	}
+}
+ 
+//------------------Code for Zooming Out------------
+if (Input.GetAxix("Mouse ScrollWheel") <0)
+{
+if (Camera.main.fieldOfView<=100)
+Camera.main.fieldOfView +=2;
+if (Camera.main.orthographicSize<=20)
+Camera.main.orthographicSize +=0.5;
+}
+
+//----------------Code for Zooming In-----------------------
+if (Input.GetAxis("Mouse ScrollWheel") > 0)
+{
+if (Camera.main.fieldOfView>2)
+Camera.main.fieldOfView -=2;
+if (Camera.main.orthographicSize>=1)
+Camera.main.orthographicSize -=0.5;
+}
+
+//-------Code to switch camera between Perspective and Orthographic--------
+if (Input.GetKeyUp(KeyCode.B))
+{
+if (Camera.main.orthographic==true)
+Camera.main.orthograhic=false;
+else
+Camera.main.orthographic=true;
+}
+ 
+====================================================
+Pinch Zoom Example Code:
+----------------------------------------------------
+using UnityEngine; 
+using System.Collections;
+ 
+public class CameraZoomPinch : MonoBehaviour 
+{
+    public int speed = 4;
+    public Camera selectedCamera;
+    public float MINSCALE = 2.0F;
+    public float MAXSCALE = 5.0F;
+    public float minPinchSpeed = 5.0F;
+    public float varianceInDistances = 5.0F;
+    private float touchDelta = 0.0F;
+    private Vector2 prevDist = new Vector2(0,0);
+    private Vector2 curDist = new Vector2(0,0);
+    private float speedTouch0 = 0.0F;
+    private float speedTouch1 = 0.0F;
+ 
+    // Use this for initialization
+    void Start () 
+    {
+ 
+    }
+ 
+    // Update is called once per frame
+    void Update () 
+    {
+ 
+       if (Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved) 
+       {
+ 
+         curDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //current distance between finger touches
+         prevDist = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition) - (Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition)); //difference in previous locations using delta positions
+         touchDelta = curDist.magnitude - prevDist.magnitude;
+         speedTouch0 = Input.GetTouch(0).deltaPosition.magnitude / Input.GetTouch(0).deltaTime;
+         speedTouch1 = Input.GetTouch(1).deltaPosition.magnitude / Input.GetTouch(1).deltaTime;
+ 
+ 
+         if ((touchDelta + varianceInDistances <= 1) && (speedTouch0 > minPinchSpeed) && (speedTouch1 > minPinchSpeed))
+         {
+ 
+          selectedCamera.fieldOfView = Mathf.Clamp(selectedCamera.fieldOfView + (1 * speed),15,90);
+         }
+ 
+         if ((touchDelta +varianceInDistances > 1) && (speedTouch0 > minPinchSpeed) && (speedTouch1 > minPinchSpeed))
+         {
+ 
+          selectedCamera.fieldOfView = Mathf.Clamp(selectedCamera.fieldOfView - (1 * speed),15,90);
+         }
+ 
+       }     
+    }
+ 
+}
+
+ Just make sure that you add your camera to the inspector for the public variable "selectedCamera". Enjoy!
+==================================================== 
+How to insert terrain SAT image as transparent layer
+----------------------------------------------------
+ So, I'd start by creating the image using (Gimp/Photoshop/Paint/etc...) without any transparency, then bring it in as an asset in Unity. Select it, then go to the "GameObject" menu, select a GUI Texture (which will automatically create it with the right resolution, etc...) then you go to the inspector, select the Color segment and then change the Alpha value to what you'd like. Then, once that's done you can use a script to tell the image to appear and, because it's a GUI Texture, it will be viewed on top of everything else as desired.
+
+To make it prettier, though, you can use a script to manually change the alpha value so that when the image is needed you can fade into it being there and increase/decrease it's opacity to reflect intensity.
+====================================================
+Multi-touch gestures
+----------------------------------------------------
+http://interactivelab.github.io/TouchScript/
+
+====================================================

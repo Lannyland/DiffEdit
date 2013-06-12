@@ -1,0 +1,48 @@
+Initialize engine version: 4.1.2f1 (911c7369eeac)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.1090]
+    Renderer: RDPDD Chained DD
+    Vendor:   REFERENCE
+    VRAM:     977 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\NGUI.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\NGUI.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\OSCsharp.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\OSCsharp.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TouchScript.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TouchScript.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TouchScript.Pro.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TouchScript.Pro.dll into Unity Child Domain
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TUIOsharp.dll (this message is harmless)
+Loading C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\TUIOsharp.dll into Unity Child Domain
+- Completed reload, in  0.071 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+D3D device reset failed [invalid call]
+ 
+(Filename:  Line: 325)
+
+Switching to resolution 1920x1080 failed, trying lower one
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Lanny\MAMI\DiffMod\DiffMod\DiffMod_Data\Managed\System.Core.dll (this message is harmless)
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 330.
+Total: 1.300401 ms (FindLiveObjects: 0.023243 ms CreateObjectMapping: 0.015092 ms MarkObjects: 0.421392 ms  DeleteObjects: 0.009961 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 311.
+Total: 1.172716 ms (FindLiveObjects: 0.024148 ms CreateObjectMapping: 0.015092 ms MarkObjects: 0.380038 ms  DeleteObjects: 0.005131 ms)
+

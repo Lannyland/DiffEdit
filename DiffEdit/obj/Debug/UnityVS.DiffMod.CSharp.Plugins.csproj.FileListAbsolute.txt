@@ -1,0 +1,11 @@
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\UnityVS.DiffMod.CSharp.Plugins.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\UnityVS.DiffMod.CSharp.Plugins.pdb
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\NGUI.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\UnityEditor.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\UnityEngine.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\Mono.Cecil.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\nunit.framework.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\obj\Debug\UnityVS.DiffMod.CSharp.Plugins.csprojResolveAssemblyReference.cache
+C:\Lanny\MAMI\DiffMod\DiffMod\obj\Debug\UnityVS.DiffMod.CSharp.Plugins.dll
+C:\Lanny\MAMI\DiffMod\DiffMod\obj\Debug\UnityVS.DiffMod.CSharp.Plugins.pdb

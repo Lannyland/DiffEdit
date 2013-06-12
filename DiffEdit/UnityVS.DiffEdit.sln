@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.DiffEdit.CSharp", "UnityVS.DiffEdit.CSharp.csproj", "{1CADFAFD-3B60-3B58-F097-7FE6B64991F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.DiffEdit.CSharp.Editor", "UnityVS.DiffEdit.CSharp.Editor.csproj", "{0A6C87B8-0537-64EB-40EA-0201B78627F9}"
+EndProject
+Project("{1FAC5C55-277D-4884-94A4-83DBDAF57E56}") = "UnityVS.DiffEdit.UnityScript.Plugins", "UnityVS.DiffEdit.UnityScript.Plugins.unityproj", "{E04BC032-3334-956A-5B8E-E7582C42F49A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.DiffEdit.CSharp.Plugins", "UnityVS.DiffEdit.CSharp.Plugins.csproj", "{EBBE5AA6-DF05-EF99-AD6A-3723B6517ADB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CADFAFD-3B60-3B58-F097-7FE6B64991F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CADFAFD-3B60-3B58-F097-7FE6B64991F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CADFAFD-3B60-3B58-F097-7FE6B64991F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CADFAFD-3B60-3B58-F097-7FE6B64991F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6C87B8-0537-64EB-40EA-0201B78627F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6C87B8-0537-64EB-40EA-0201B78627F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6C87B8-0537-64EB-40EA-0201B78627F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6C87B8-0537-64EB-40EA-0201B78627F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04BC032-3334-956A-5B8E-E7582C42F49A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04BC032-3334-956A-5B8E-E7582C42F49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04BC032-3334-956A-5B8E-E7582C42F49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04BC032-3334-956A-5B8E-E7582C42F49A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBBE5AA6-DF05-EF99-AD6A-3723B6517ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBBE5AA6-DF05-EF99-AD6A-3723B6517ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBBE5AA6-DF05-EF99-AD6A-3723B6517ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBBE5AA6-DF05-EF99-AD6A-3723B6517ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
