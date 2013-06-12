@@ -14,7 +14,7 @@
     <NoStdLib>true</NoStdLib>
     <ProjectTypeGuids>{84365F2C-1DDE-431A-8C14-179ADC971E4D};{1FAC5C55-277D-4884-94A4-83DBDAF57E56}</ProjectTypeGuids>
     <MonoProfile>unity</MonoProfile>
-    <UnityPath>C:\Program Files (x86)\Unity\Editor</UnityPath>
+    <UnityPath>C:\Program Files\Unity\Editor</UnityPath>
     <MonoPath>$(UnityPath)\Data\Mono</MonoPath>
     <LibraryAssembly>Assembly-UnityScript-firstpass.dll</LibraryAssembly>
     <TargetFrameworkDirectory>$(MonoPath)\lib\mono\$(MonoProfile)</TargetFrameworkDirectory>
