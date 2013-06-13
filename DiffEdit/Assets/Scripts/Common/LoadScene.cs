@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class LoadMenu : MonoBehaviour {
+public class LoadScene : MonoBehaviour {
+
+    public string SceneName = "";
 
 	// Use this for initialization
 	void Start () {
@@ -13,10 +15,9 @@ public class LoadMenu : MonoBehaviour {
 	
 	}
 
-    // When Cancel button from Settings scene is clicked
+    // When button is clicked load a scene
     void OnClick()
     {
-        Application.LoadLevel("Menu");
+        Application.LoadLevel(SceneName);
     }
-
 }

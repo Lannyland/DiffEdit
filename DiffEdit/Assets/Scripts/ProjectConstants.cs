@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         #region Global constants
         public static string strMapFileLoad = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\Small_HikerPaulDiff.csv";
-        public static string strMapFileSave = "NewDiffMap.csv";
+        public static string strMapFileSave = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\NewDiffMap.csv";
         public static string strTerrainImage = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\TerrainImage.jpg";
 
         #endregion
