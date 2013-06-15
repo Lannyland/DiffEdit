@@ -9,8 +9,8 @@ public class Orbit : MonoBehaviour
 	public enum InputDevice { Keyboard, Mouse, Finger }
 	
 	public Transform target;
-	public InputDevice inputDevice = InputDevice.Mouse;
-	public Gesture gesture = Gesture.Pan;
+	public InputDevice inputDevice = InputDevice.Keyboard;
+	public Gesture gesture = Gesture.Rotate;
 	public float distanceMin = 1.0f;
 	public float distanceMax = 15.0f;
 	public float distanceInitial = 12.5f;

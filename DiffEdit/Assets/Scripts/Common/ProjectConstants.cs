@@ -13,6 +13,9 @@ namespace Assets.Scripts
         public static string strMapFileSave = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\NewDiffMap.csv";
         public static string strTerrainImage = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\TerrainImage.jpg";
 
+        public static int intMapWith = 100;
+        public static int intMapHeight = 100;
+
         #endregion
 
 
