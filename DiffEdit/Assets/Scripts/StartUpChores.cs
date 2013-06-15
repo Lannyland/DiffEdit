@@ -49,14 +49,14 @@ public class StartUpChores : MonoBehaviour {
         {
             for (int j = 0; j < 100; j++)
             {
-                if (i < 50)
-                {
-                    vertices[index].y = i * 2 / 100.0f;
-                }
-                else
-                {
-                    vertices[index].y = (50 - (i - 50)) / 50.0f;
-                }
+//                if (i < 50)
+//                {
+//                    vertices[index].y = i * 2 / 100.0f;
+//                }
+//                else
+//                {
+//                    vertices[index].y = (50 - (i - 50)) / 50.0f;
+//                }
 
                 HSLColor hslc = new HSLColor(i * 2.40f, 1f, 0.5f);
                 Color c = hslc.ToRGBA();
