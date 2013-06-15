@@ -15,7 +15,7 @@ public class PlayGround : MonoBehaviour {
 	void Update () {
 		RaycastHit hit = new RaycastHit();
 	  	if (Physics.Raycast (Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
-			Debug.Log ("hit.point is " + hit.point.ToString() + " Projector.transform.position is " + projector.transform.position.ToString());
+			//Debug.Log ("hit.point is " + hit.point.ToString() + " Projector.transform.position is " + projector.transform.position.ToString());
 			projector.transform.position = hit.point + new Vector3(0,5,0);
 		}
 	}

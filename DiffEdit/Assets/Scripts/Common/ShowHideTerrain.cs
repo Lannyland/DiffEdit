@@ -17,9 +17,8 @@ public class ShowHideTerrain : MonoBehaviour {
     void OnClick()
     {
         // First change label back and forth
-        Projector go = GameObject.Find("ProjectorTerrain").GetComponent<Projector>();
-
-        UILabel label = GameObject.Find("btnShowTerrain").GetComponent<UILabel>(); 
+        UILabel label = GameObject.Find("lblShowTerrain").GetComponent<UILabel>(); 
+		
         if (label.text == "Show Terrain")
         {
             label.text = "Hide Terrain";
