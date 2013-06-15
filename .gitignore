@@ -38,3 +38,9 @@ metadata
 
 /DiffEdit/DiffEdit_Data
 /DiffEdit/DiffEdit.exe
+/DiffEdit/obj
+/DiffEdit/*.suo
+/DiffEdit/Assets/Textures/BigGrid.png.meta
+/DiffEdit/Assets/Textures/BigGrid.xcf
+/DiffEdit/Assets/Textures/BigGrid.xcf.meta
+/DiffEdit/Assets/Textures/BigGrid.png
