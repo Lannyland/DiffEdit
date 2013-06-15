@@ -26,12 +26,6 @@ metadata
 /DiffEdit/UnityVS.DiffEdit.CSharp.Editor.csproj
 /DiffEdit/DiffEdit_Web
 
-/DiffEdit/Library/ScriptMapper
-/DiffEdit/Library/assetDatabase3
-/DiffEdit/Library/AssetServerCacheV3
-/DiffEdit/Library/FailedAssetImports.txt
-/DiffEdit/Library/guidmapper
-
 /DiffEdit/UnityVS.DiffEdit.UnityScript.unityproj
 
 /DiffEdit/Assembly-UnityScript.unityproj
