@@ -1,33 +1,55 @@
 using UnityEngine;
 using System.Collections;
 using Assets.Scripts;
+using System;
 
 public class StartUpChores : MonoBehaviour {
 
     public Terrain terrain;
     public Plane plane;
+	public WWW www;
+	// public Vector3[] vertices;
 
     // Use this for initialization
     void Start()
     {
         // Load terrain image file
-        LoadTerrain();
+        StartCoroutine(LoadMesh());
         
         // Scene Initialization
         SceneInit();
 
         // Test color map
-        TestColor();
+        // MeshInit();
     }
 
     // Method to load terrain material into Projector
-    IEnumerator LoadTerrain()
+    IEnumerator LoadMesh()
     {
-        WWW www = new WWW(@"file:///" + ProjectConstants.strTerrainImage);
-        yield return www;
-
-        Projector go = GameObject.Find("ProjectorTerrain").GetComponent<Projector>();
-        go.material.mainTexture = www.texture;
+		// Sets material catelog TerrainImage texture to something so at least it's not empty.
+		GameObject go = GameObject.Find("MaterialHolder");		
+		go.GetComponent<MaterialCatelog>().catelog[4].mainTexture = go.GetComponent<MaterialCatelog>().catelog[5].mainTexture;
+		
+		// Deal with web vs. local files
+		string fileLoc = ProjectConstants.strTerrainImage;
+		if(fileLoc.Substring(0, 7) != "http://")
+		{
+			fileLoc = @"file:///" + fileLoc;				
+		}
+		
+		// Load file
+		www = new WWW(fileLoc);
+	    yield return www;
+	
+	    // Stored loaded texture to a material in material catelog
+		if(www.isDone && www !=null)
+		{
+			go.GetComponent<MaterialCatelog>().catelog[4].mainTexture = www.texture;
+		}
+		else
+		{
+			Debug.Log("Error loading file.");
+		}
     }
 
     // Initialize all assets parameters to set scene ready
@@ -37,7 +59,7 @@ public class StartUpChores : MonoBehaviour {
     }
 
     // Method to test color map
-    private void TestColor()
+    private void MeshInit()
     {
         Mesh mesh = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
@@ -58,7 +80,11 @@ public class StartUpChores : MonoBehaviour {
 //                    vertices[index].y = (50 - (i - 50)) / 50.0f;
 //                }
 
-                HSLColor hslc = new HSLColor(i * 2.40f, 1f, 0.5f);
+                vertices[index].x = Convert.ToSingle(j)/10-5;
+				vertices[index].y = 0;
+				vertices[index].z = Convert.ToSingle(i)/10-5;
+				
+				HSLColor hslc = new HSLColor(i * 2.40f, 1f, 0.5f);
                 Color c = hslc.ToRGBA();
                 colors[index] = c;
                 index++;

@@ -11,30 +11,21 @@ namespace Assets.Scripts
         #region Global constants
         public static string strMapFileLoad = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\Small_HikerPaulDiff.csv";
         public static string strMapFileSave = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\NewDiffMap.csv";
-        public static string strTerrainImage = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\TerrainImage.jpg";
+        // public static string strTerrainImage = @"http://lannyland.com/images/LannylandTechHover.png";
+		public static string strTerrainImage = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\TerrainImage.jpg";
 
         public static int intMapWith = 100;
         public static int intMapHeight = 100;
 
         #endregion
 
-
+		
         #region Editor constants
-
-        // Terrain related constants
-        public static Vector3 TerrainLoc = new Vector3(0,0,0);
-        public static Vector3 TerrainSize = new Vector3(129, 129, 50);
-        public static int TerrainHeightMapResolution = 129;
-                
-        // Main camera related constants
-        public static Vector3 MainCameraLoc = new Vector3(50, 100, 50);
-        public static Vector3 MainCameraRotation = new Vector3(90, 0, 0);
-
-        // Spot light related constants
-        public static Vector3 SpotLightLoc = new Vector3(50,700,50);
-        public static Vector3 SpotLightRotation = new Vector3(0, 0, 0);
-        public static int SpotLightRange = 1000;
-        public static float SpotLightIntensity = 2.62f;
+		
+		public static int diffLevel = 1;	// 1: Easy 2: Medium 3: Hard
+		public static int navMode = 1;		// 1: Rotate 2: Pan
+		public static int editMode = 1;		// 1: Paint 2: Select
+		public static int brushSize = 1;	// Paint Brush Size from 1 to 10
 
         #endregion
     }
