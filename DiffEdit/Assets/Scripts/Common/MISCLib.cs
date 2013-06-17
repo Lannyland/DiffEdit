@@ -171,7 +171,7 @@ namespace Assets.Scripts.Common
 		}
 		
 		// Find all points within Euclidian distance r from Point(x,y)
-		public static Vector2[] PointInCircle(int x, int y, int r)
+		public static ArrayList PointInCircle(int x, int y, int r)
 		{
 			// Find box size and only evaluate things in box
 			int offset = (int)(r/2);
@@ -185,19 +185,22 @@ namespace Assets.Scripts.Common
 			maxX = Mathf.Clamp(x+offset, 0, l);
 			minY = Mathf.Clamp(x-offset, 0, l);
 			maxY = Mathf.Clamp(x+offset, 0, l);
-			
 
-			for(int i=x-offset; i<x; i++)
-			{
-				for (int j=0; j<y; j++)
-				{
-					
-				}
-			}
-			// So I need current size
+            ArrayList points = new ArrayList();
+
+            for (int i = minX; i < maxX + 1; i++)
+            {
+                for (int j = minY; j < maxY + 1; j++)
+                {
+                    if (EuclidianDistance(i, j, x, y) <= r)
+                    {
+                        Vector3 v = new Vector3(i, 0, j);
+                        points.Add(v);
+                    }
+                }
+            }
 			
-			Vector2[] result = new Vector2[10];			
-			return result;
+			return points;
 		}
 		
         // Calculating Euclidian Distance

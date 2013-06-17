@@ -11,7 +11,7 @@ namespace Assets.Scripts
         #region Global constants
         public static string strMapFileLoad = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\Small_HikerPaulDiff.csv";
         public static string strMapFileSave = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\NewDiffMap.csv";
-        // public static string strTerrainImage = @"http://lannyland.com/images/LannylandTechHover.png";
+        // public static string strTerrainImage = @"http://lannyland.com/images/yulu.jpg";
 		public static string strTerrainImage = @"C:\Lanny\MAMI\IPPA\Maps\DiffMaps\TerrainImage.jpg";
 
         public static int intMapWith = 100;
