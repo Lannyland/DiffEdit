@@ -170,14 +170,34 @@ namespace Assets.Scripts.Common
 			return result;
 		}
 		
-		// Find all points within paintbrush so we can paint
-		public static Vector2[] PointInCircle(Vector3 v, int brushSize)
+		// Find all points within Euclidian distance r from Point(x,y)
+		public static Vector2[] PointInCircle(int x, int y, int r)
 		{
 			// Find box size and only evaluate things in box
-			float offset = brushSize/2;
+			int offset = (int)(r/2);
+			int minX = 0;
+			int maxX = x;
+			int minY = 0; 			
+			int maxY = 0;
+			int l = Assets.Scripts.ProjectConstants.intMapWith;
+			
+			minX = Mathf.Clamp(x-offset, 0, l);
+			maxX = Mathf.Clamp(x+offset, 0, l);
+			minY = Mathf.Clamp(x-offset, 0, l);
+			maxY = Mathf.Clamp(x+offset, 0, l);
+			
+
+			for(int i=x-offset; i<x; i++)
+			{
+				for (int j=0; j<y; j++)
+				{
+					
+				}
+			}
 			// So I need current size
 			
-			return new Vector2[5];
+			Vector2[] result = new Vector2[10];			
+			return result;
 		}
 		
         // Calculating Euclidian Distance
