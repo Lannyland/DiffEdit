@@ -184,6 +184,20 @@ namespace Assets.Scripts.Common
 				return Color.red;
 			}
 		}
+
+        // Return color code based on height for Diff Maps
+        public static Color HeightToDistColor(float height, float max)
+        {
+            float ratio = 0;
+            // Deal with all flat at 0
+            if (max > 0)
+            {
+                ratio = 1.0f - height / max;
+            }
+            HSLColor hslc = new HSLColor(240.0f*ratio, 1f, 0.4f);
+            Color c = hslc.ToRGBA();
+            return c;
+        }
 		
 	}
 }
