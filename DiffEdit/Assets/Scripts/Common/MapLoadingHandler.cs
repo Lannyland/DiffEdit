@@ -6,6 +6,8 @@ using Assets.Scripts.Common;
 
 public class MapLoadingHandler : MonoBehaviour {
 
+	private MeshFilter unappliedMesh;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -18,10 +20,9 @@ public class MapLoadingHandler : MonoBehaviour {
 	
 	void OnClick()
 	{
-		if(this.gameObject.name=="btnNew")
-		{
-			NewButtonHandler();
-		}
+		Debug.Log ("here!");
+		Debug.Log (Time.time);			
+
 		if(this.gameObject.name=="btnLoad")
 		{
 			LoadButtonHandler();
@@ -30,30 +31,6 @@ public class MapLoadingHandler : MonoBehaviour {
 		{
 			SaveButtonHandler();
 		}		
-	}
-	
-	void NewButtonHandler()
-	{
-		// Set everything to easy on plane
-		int width = ProjectConstants.intMapWith;
-		int height = ProjectConstants.intMapHeight;
-		
-        Mesh mesh = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
-        Vector3[] vertices = mesh.vertices;
-        Color[] colors = new Color[vertices.Length];
-        float t = 0.0f;
-        int index = 0;
-
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            vertices[index].y = 0;
-			colors[index] = Color.blue;
-            index++;
-        }
-        mesh.vertices = vertices;
-        mesh.colors = colors;
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();		
 	}
 	
 	void LoadButtonHandler()
@@ -74,4 +51,5 @@ public class MapLoadingHandler : MonoBehaviour {
 		RtwMatrix mapOut = Assets.Scripts.Common.MISCLib.ArrayToMatrix(mesh.vertices);
 		MISCLib.SaveMap(ProjectConstants.strMapFileSave, Assets.Scripts.Common.MISCLib.FlipTopBottom(mapOut));
 	}
+	
 }

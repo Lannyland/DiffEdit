@@ -170,45 +170,20 @@ namespace Assets.Scripts.Common
 			return result;
 		}
 		
-		// Find all points within Euclidian distance r from Point(x,y)
-		public static ArrayList PointInCircle(int x, int y, int r)
+		// Return color code based on height for Diff Maps
+		public static Color HeightToDiffColor(float height)
 		{
-			// Find box size and only evaluate things in box
-			int offset = (int)(r/2);
-			int minX = 0;
-			int maxX = x;
-			int minY = 0; 			
-			int maxY = 0;
-			int l = Assets.Scripts.ProjectConstants.intMapWith;
-			
-			minX = Mathf.Clamp(x-offset, 0, l);
-			maxX = Mathf.Clamp(x+offset, 0, l);
-			minY = Mathf.Clamp(x-offset, 0, l);
-			maxY = Mathf.Clamp(x+offset, 0, l);
-
-            ArrayList points = new ArrayList();
-
-            for (int i = minX; i < maxX + 1; i++)
-            {
-                for (int j = minY; j < maxY + 1; j++)
-                {
-                    if (EuclidianDistance(i, j, x, y) <= r)
-                    {
-                        Vector3 v = new Vector3(i, 0, j);
-                        points.Add(v);
-                    }
-                }
-            }
-			
-			return points;
+			int h = (int)Math.Round( height);
+			switch (h)
+			{
+			case 0:
+				return Color.blue;
+			case 1:
+				return Color.green;
+			default:
+				return Color.red;
+			}
 		}
 		
-        // Calculating Euclidian Distance
-        public static double EuclidianDistance(int x1, int y1, int x2, int y2)
-        {
-            double distance = Math.Sqrt(Math.Pow(Math.Abs(x1 - x2), 2) + Math.Pow(Math.Abs(y1 - y2), 2));
-            return distance;
-        }
-
 	}
 }

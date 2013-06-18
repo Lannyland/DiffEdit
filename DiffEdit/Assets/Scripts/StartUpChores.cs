@@ -55,7 +55,6 @@ public class StartUpChores : MonoBehaviour {
     // Initialize all assets parameters to set scene ready
     private void SceneInit()
     {
-        
     }
 
     // Method to test color map

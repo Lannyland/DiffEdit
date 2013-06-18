@@ -26,6 +26,8 @@ namespace Assets.Scripts
 		public static int navMode = 1;		// 1: Rotate 2: Pan
 		public static int editMode = 1;		// 1: Paint 2: Select
 		public static int brushSize = 1;	// Paint Brush Size from 1 to 10
+		
+		public static Mesh mesh = null;
 
         #endregion
     }
