@@ -6,7 +6,6 @@ public class BrushSize : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -17,6 +16,14 @@ public class BrushSize : MonoBehaviour {
 	// When value changes
 	void OnSliderChange(float value)
 	{
+        // Not allow brush size to be 0
+        UISlider slide = this.gameObject.GetComponent<UISlider>();
+        if (slide.sliderValue == 0)
+        {
+            slide.sliderValue = 0.1f;
+            value = 0.1f;
+        }
+
 		// Change display text
 		UILabel label = GameObject.Find("lblBrushSize").GetComponent<UILabel>();
 		int v = Convert.ToInt16(value*10);
