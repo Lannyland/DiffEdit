@@ -200,7 +200,7 @@ namespace Assets.Scripts.Common
         }
 
         // Method to see if a point is in a polygon
-        static bool PointInPolygon(Vector2 p, Vector2[] poly)
+        public static bool PointInPolygon(Vector2 p, Vector2[] poly)
         {
             Vector2 p1, p2;
             bool inside = false;

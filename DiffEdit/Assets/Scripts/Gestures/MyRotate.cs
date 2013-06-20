@@ -10,7 +10,7 @@ public class MyRotate : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	GameObject.Find("GUIText").GetComponent<GUIText>().text = "Start";
+	    // GameObject.Find("GUIText").GetComponent<GUIText>().text = "Start";
         GetComponent<RotateGesture>().StateChanged += onRotateStateChanged;
 	}
 	
@@ -24,7 +24,7 @@ public class MyRotate : MonoBehaviour {
 
     private void onRotateStateChanged(object sender, GestureStateChangeEventArgs e)
     {
-		GameObject.Find("GUIText").GetComponent<GUIText>().text = "State changed.";
+		// GameObject.Find("GUIText").GetComponent<GUIText>().text = "State changed.";
 		switch (e.State)
         {
             case Gesture.GestureState.Began:
@@ -35,13 +35,13 @@ public class MyRotate : MonoBehaviour {
                 //{
                 //    targetRotation = Quaternion.AngleAxis(gesture.LocalDeltaRotation, gesture.WorldTransformPlane.normal) * targetRotation;
                 //}
-                GameObject.Find("GUIText").GetComponent<GUIText>().text = "Rotating";
+                // GameObject.Find("GUIText").GetComponent<GUIText>().text = "Rotating";
 				rotate = true;
 				speed = gesture.LocalDeltaRotation;
                 break;
 			case Gesture.GestureState.Ended:
 				rotate = false;
-				GameObject.Find("GUIText").GetComponent<GUIText>().text = "Stopped";
+				// GameObject.Find("GUIText").GetComponent<GUIText>().text = "Stopped";
 				break;
 		}
     }

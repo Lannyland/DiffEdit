@@ -7,36 +7,35 @@ using UnityEngine;
 namespace TouchScript.Gestures
 {
     /// <summary>
-    /// Recognizes scaling gesture.
+    /// Recognizes rotation gesture.
     /// </summary>
-    public class ScaleGesture2 : TwoClusterTransform2DGestureBase
+    public class RotateGesture2 : TwoClusterTransform2DGestureBase
     {
         #region Private variables
 
         [SerializeField]
-        private float scalingThreshold = .5f;
+        private float rotationThreshold = 3f;
 
-        private float scalingBuffer;
-        private bool isScaling = false;
+        private float rotationBuffer;
+        private bool isRotating = false;
 
         #endregion
 
         #region Public properties
 
         /// <summary>
-        /// Minimum distance in cm between clusters for gesture to be considered possible.
+        /// Minimum rotation in degrees for gesture to be considered possible.
         /// </summary>
-        public float ScalingThreshold
+        public float RotationThreshold
         {
-            get { return scalingThreshold; }
-            set { scalingThreshold = value; }
+            get { return rotationThreshold; }
+            set { rotationThreshold = value; }
         }
 
         /// <summary>
-        /// Contains local delta scale when gesture is recognized.
-        /// Value is between 0 and +infinity, where 1 is no scale, 0.5 is scaled in half, 2 scaled twice.
+        /// Contains local rotation when gesture is recognized.
         /// </summary>
-        public float LocalDeltaScale { get; private set; }
+        public float LocalDeltaRotation { get; private set; }
 
         #endregion
 
@@ -50,7 +49,7 @@ namespace TouchScript.Gestures
             if (!clusters.HasClusters) return;
 
             Vector3 oldGlobalCenter3DPos, oldLocalCenter3DPos, newGlobalCenter3DPos, newLocalCenter3DPos;
-            var deltaScale = 1f;
+            var deltaRotation = 0f;
 
             var old2DPos1 = clusters.GetPreviousCenterPosition(Clusters2.CLUSTER1);
             var old2DPos2 = clusters.GetPreviousCenterPosition(Clusters2.CLUSTER2);
@@ -61,27 +60,24 @@ namespace TouchScript.Gestures
             var new3DPos1 = ProjectionUtils.CameraToPlaneProjection(new2DPos1, projectionCamera, WorldTransformPlane);
             var new3DPos2 = ProjectionUtils.CameraToPlaneProjection(new2DPos2, projectionCamera, WorldTransformPlane);
             var newVector = new3DPos2 - new3DPos1;
+            var oldVector = old3DPos2 - old3DPos1;
 
-            Vector2 oldCenter2DPos = (old2DPos1 + old2DPos2)*.5f;
-            Vector2 newCenter2DPos = (new2DPos1 + new2DPos2)*.5f;
+            Vector2 oldCenter2DPos = (old2DPos1 + old2DPos2) * .5f;
+            Vector2 newCenter2DPos = (new2DPos1 + new2DPos2) * .5f;
 
-            if (isScaling)
+            var angle = Vector3.Angle(oldVector, newVector);
+            if (Vector3.Dot(Vector3.Cross(oldVector, newVector), WorldTransformPlane.normal) < 0) angle = -angle;
+            if (isRotating)
             {
-                deltaScale = newVector.magnitude/Vector3.Distance(old3DPos2, old3DPos1);
-            } else
+                deltaRotation = angle;
+            }
+            else
             {
-                var old2DDist = Vector2.Distance(old2DPos1, old2DPos2);
-                var new2DDist = Vector2.Distance(new2DPos1, new2DPos2);
-                var delta2DDist = new2DDist - old2DDist;
-                scalingBuffer += delta2DDist;
-                var dpiScalingThreshold = ScalingThreshold*manager.DotsPerCentimeter;
-                if (scalingBuffer*scalingBuffer >= dpiScalingThreshold*dpiScalingThreshold)
+                rotationBuffer += angle;
+                if (rotationBuffer * rotationBuffer >= RotationThreshold * RotationThreshold)
                 {
-                    isScaling = true;
-                    var oldVector2D = (old2DPos2 - old2DPos1).normalized;
-                    var startScale = (new2DDist - scalingBuffer)*.5f;
-                    var startVector = oldVector2D*startScale;
-                    deltaScale = newVector.magnitude/(ProjectionUtils.CameraToPlaneProjection(oldCenter2DPos + startVector, projectionCamera, WorldTransformPlane) - ProjectionUtils.CameraToPlaneProjection(oldCenter2DPos - startVector, projectionCamera, WorldTransformPlane)).magnitude;
+                    isRotating = true;
+                    deltaRotation = rotationBuffer;
                 }
             }
 
@@ -90,7 +86,7 @@ namespace TouchScript.Gestures
             oldLocalCenter3DPos = globalToLocalPosition(oldGlobalCenter3DPos);
             newLocalCenter3DPos = globalToLocalPosition(newGlobalCenter3DPos);
 
-            if (Math.Abs(deltaScale - 1f) > 0.00001)
+            if (Math.Abs(deltaRotation) > 0.00001)
             {
                 switch (State)
                 {
@@ -105,12 +101,13 @@ namespace TouchScript.Gestures
                         LocalTransformCenter = newLocalCenter3DPos;
                         PreviousLocalTransformCenter = oldLocalCenter3DPos;
 
-                        LocalDeltaScale = deltaScale;
+                        LocalDeltaRotation = deltaRotation;
 
                         if (State == GestureState.Possible)
                         {
                             setState(GestureState.Began);
-                        } else
+                        }
+                        else
                         {
                             setState(GestureState.Changed);
                         }
@@ -123,9 +120,9 @@ namespace TouchScript.Gestures
         protected override void reset()
         {
             base.reset();
-            LocalDeltaScale = 1f;
-            scalingBuffer = 0f;
-            isScaling = false;
+            LocalDeltaRotation = 0f;
+            rotationBuffer = 0f;
+            isRotating = false;
         }
 
         #endregion

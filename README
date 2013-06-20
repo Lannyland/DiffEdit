@@ -1,2 +1,7 @@
 Read https://facwiki.cs.byu.edu/WiSAR/index.php/DiffMod for more info.
 
+External Libraries Used:
+
+NGUI Free Edition -- For GUI design
+TouchScript 2.0.1 -- For touch gestures
+Vectrosity Unity4 -- For drawing lines

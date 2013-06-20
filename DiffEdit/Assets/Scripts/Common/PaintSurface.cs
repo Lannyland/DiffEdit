@@ -1,8 +1,12 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using TouchScript;
+using TouchScript.Utils;
 
 public class PaintSurface : MonoBehaviour {
+
+    private float TimeT = 0.0f;
 
     public float radius = 10;
     public float pull = 100f;
@@ -49,11 +53,25 @@ public class PaintSurface : MonoBehaviour {
 	    // When no button is pressed we update the mesh collider
 	    if (!Input.GetMouseButton (0))
 	    {
+            TimeT = 0;
 		    ApplyMeshCollider();
 		    return;
 	    }
-		
-		// When mouse button is pressed
+
+        // Delay mouse click so we can have two fingers gestures working simultaneously.
+        TimeT += Time.deltaTime;
+        if (Input.GetMouseButton(0) && TimeT < 0.5f)
+        {
+            return;
+        }
+
+        // Don't paint if there are two fingers
+        if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 1)
+        {
+            return;
+        }
+
+        // When mouse button is pressed
         // First set brush size
         switch (fallOff)
 		{
@@ -73,13 +91,13 @@ public class PaintSurface : MonoBehaviour {
 			break;
 		}
 
-        Debug.Log(Assets.Scripts.ProjectConstants.brushSize.ToString());	
+        // Debug.Log(Assets.Scripts.ProjectConstants.brushSize.ToString());	
         // Did we hit the surface?
 	    RaycastHit hit;
 	    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 	    if (Physics.Raycast (ray, out hit, 100))
 	    {
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            // Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
             MeshFilter filter = hit.collider.GetComponent<MeshFilter>();
 		    if (filter)
 		    {
@@ -94,7 +112,7 @@ public class PaintSurface : MonoBehaviour {
 			
 			    // Deform mesh
 			    Vector3 relativePoint = filter.transform.InverseTransformPoint(hit.point);
-                Debug.Log("relativePoint=" + relativePoint.x + "," + relativePoint.y + "," + relativePoint.z);
+                // Debug.Log("relativePoint=" + relativePoint.x + "," + relativePoint.y + "," + relativePoint.z);
                 DeformMesh(filter.mesh, relativePoint, pull * Time.deltaTime, radius);
 		    }
 	    }

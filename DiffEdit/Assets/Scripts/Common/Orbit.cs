@@ -78,46 +78,78 @@ public class Orbit : MonoBehaviour
 	float GetInput(InputDevice id, string s)
 	{
 		float result = 0.0f;
-		switch(id)
-		{
-		case InputDevice.Keyboard:
-			result = Input.GetAxis(s);
-			break;
-		case InputDevice.Mouse:
-			float scale = 1.0f;
-			if(gesture == Gesture.Rotate)
-			{
-				scale = 0.5f;
-			}
-			else
-			{
-				scale = 1.0f;
-			}
-			switch (s)
-			{
-			case "Horizontal":
-				result = Input.GetAxis("Mouse X") * scale * distanceCurrent;
-				break;
-			case "Vertical":
-				result = Input.GetAxis("Mouse Y") * scale * distanceCurrent;
-				break;
-			case "Mouse ScrollWheel":
-				result = Input.GetAxis(s);
-				break;
-			}
-			break;
-		case InputDevice.Finger:
-			// To be replaced by gesture finger location
-			if(s == "Horizontal")
-			{
-				result = Input.GetAxis("Mouse X") ;
-			}
-			if(s == "Vertical")
-			{
-				result = Input.GetAxis("Mouse Y") ;
-			}
-			break;
-		}
+        switch (id)
+        {
+            case InputDevice.Keyboard:
+                if (s == "Mouse ScrollWheel" && GameObject.Find("Plane").GetComponent<MyScale>().scale)
+                {
+                    result = GameObject.Find("Plane").GetComponent<MyScale>().gestureInput;
+                    //if (result != 0)
+                    //{
+                    //    GameObject.Find("GUIText").GetComponent<UILabel>().text = result.ToString();
+                    //}
+                }
+                else if (s == "Horizontal" && GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().pan)
+                {
+                    result = GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().gestureInput.x * 0.2f;
+                    //GameObject.Find("GUIText").GetComponent<UILabel>().text = GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().gestureInput.ToString();
+                }
+                else if (s == "Vertical" && GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().pan)
+                {
+                    result = GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().gestureInput.y * 0.2f;
+                    //GameObject.Find("GUIText").GetComponent<UILabel>().text = GameObject.Find("Plane").GetComponent<MyTwoFingerPan>().gestureInput.ToString();
+                }
+                else
+                {
+                    result = Input.GetAxis(s);
+                }
+                break;
+            case InputDevice.Mouse:
+                float scale = 1.0f;
+                if (gesture == Gesture.Rotate)
+                {
+                    scale = 0.5f;
+                }
+                else
+                {
+                    scale = 1.0f;
+                }
+                switch (s)
+                {
+                    case "Horizontal":
+                        result = Input.GetAxis("Mouse X") * scale * distanceCurrent;
+                        // GameObject.Find("GUIText").GetComponent<UILabel>().text = result.ToString();
+                        break;
+                    case "Vertical":
+                        result = Input.GetAxis("Mouse Y") * scale * distanceCurrent;
+                        // GameObject.Find("GUIText").GetComponent<UILabel>().text = result.ToString();
+                        break;
+                    case "Mouse ScrollWheel":
+                        if (GameObject.Find("Plane").GetComponent<MyScale>().scale)
+                        {
+                            result = GameObject.Find("Plane").GetComponent<MyScale>().gestureInput;
+                            // GameObject.Find("GUIText").GetComponent<UILabel>().text = result.ToString();
+                        }
+                        else
+                        {
+                            result = Input.GetAxis(s);
+                            // GameObject.Find("GUIText").GetComponent<UILabel>().text = result.ToString();
+                        }
+                        break;
+                }
+                break;
+            case InputDevice.Finger:
+                // To be replaced by gesture finger location
+                if (s == "Horizontal")
+                {
+                    result = Input.GetAxis("Mouse X");
+                }
+                if (s == "Vertical")
+                {
+                    result = Input.GetAxis("Mouse Y");
+                }
+                break;
+        }
 		return result;						
 	}
 	

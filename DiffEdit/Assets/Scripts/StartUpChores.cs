@@ -55,6 +55,7 @@ public class StartUpChores : MonoBehaviour {
     // Initialize all assets parameters to set scene ready
     private void SceneInit()
     {
+        Camera.main.transform.GetComponent<DrawFreeLine>().enabled = false;
     }
 
     // Method to test color map

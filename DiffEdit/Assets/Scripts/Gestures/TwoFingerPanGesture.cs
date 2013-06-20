@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TouchScript.Utils;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace TouchScript.Gestures
     /// <summary>
     /// Recognizes cluster movement.
     /// </summary>
-    [AddComponentMenu("TouchScript/Gestures/Pan Gesture")]
-    public class TwoFingerPanGesture : Transform2DGestureBase
+    [AddComponentMenu("TouchScript/Gestures/Two Finger Pan Gesture")]
+    public class TwoFingerPanGesture : TwoClusterTransform2DGestureBase
     {
         #region Private variables
 
@@ -42,6 +43,10 @@ namespace TouchScript.Gestures
         /// </summary>
         public Vector3 LocalDeltaPosition { get; private set; }
 
+        // Added two new properties
+        public Vector2 FingerPositionBegin { get; private set; }
+        public Vector2 FingerPositionEnd { get; private set; }
+
         #endregion
 
         #region Gesture callbacks
@@ -51,12 +56,27 @@ namespace TouchScript.Gestures
         {
             base.touchesMoved(touches);
 
+            if (!clusters.HasClusters) return;
+
             var globalDelta3DPos = Vector3.zero;
             var localDelta3DPos = Vector3.zero;
             Vector3 oldGlobalCenter3DPos, oldLocalCenter3DPos, newGlobalCenter3DPos, newLocalCenter3DPos;
 
-            Vector2 oldCenter2DPos = PreviousScreenPosition;
-            Vector2 newCenter2DPos = ScreenPosition;
+            var old2DPos1 = clusters.GetPreviousCenterPosition(Clusters2.CLUSTER1);
+            var old2DPos2 = clusters.GetPreviousCenterPosition(Clusters2.CLUSTER2);
+            var new2DPos1 = clusters.GetCenterPosition(Clusters2.CLUSTER1);
+            var new2DPos2 = clusters.GetCenterPosition(Clusters2.CLUSTER2);
+            var old3DPos1 = ProjectionUtils.CameraToPlaneProjection(old2DPos1, projectionCamera, WorldTransformPlane);
+            var old3DPos2 = ProjectionUtils.CameraToPlaneProjection(old2DPos2, projectionCamera, WorldTransformPlane);
+            var new3DPos1 = ProjectionUtils.CameraToPlaneProjection(new2DPos1, projectionCamera, WorldTransformPlane);
+            var new3DPos2 = ProjectionUtils.CameraToPlaneProjection(new2DPos2, projectionCamera, WorldTransformPlane);
+            var newVector = new3DPos2 - new3DPos1;
+
+            Vector2 oldCenter2DPos = (old2DPos1 + old2DPos2) * .5f;
+            Vector2 newCenter2DPos = (new2DPos1 + new2DPos2) * .5f;
+
+            FingerPositionBegin = oldCenter2DPos;
+            FingerPositionEnd = newCenter2DPos;
 
             if (isMoving)
             {
