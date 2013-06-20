@@ -5,7 +5,6 @@ using System;
 
 public class StartUpChores : MonoBehaviour {
 
-    public Terrain terrain;
     public Plane plane;
 	public WWW www;
 	// public Vector3[] vertices;
