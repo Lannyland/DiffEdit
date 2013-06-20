@@ -2,6 +2,7 @@ using UnityEngine;
 using Vectrosity;
 using System.Collections;
 using System;
+using TouchScript;
 
 public class DrawFreeLine : MonoBehaviour {
 
@@ -40,6 +41,14 @@ public class DrawFreeLine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        // Don't paint if there are two fingers
+        if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 1)
+        {
+            GameObject.Find("GUIText").GetComponent<UILabel>().text = "Two fingers detected";
+            return;
+        }
+
         Vector2 mousePos = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
