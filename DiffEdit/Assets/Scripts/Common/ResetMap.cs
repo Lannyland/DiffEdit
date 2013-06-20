@@ -3,8 +3,6 @@ using System.Collections;
 
 public class ResetMap : MonoBehaviour {
 
-	private MeshFilter unappliedMesh;
-	
 	// Use this for initialization
 	void Start () {
 	
@@ -17,7 +15,6 @@ public class ResetMap : MonoBehaviour {
     void OnMouseUpAsButton() {
         // Set everything to easy on plane
 		MeshFilter meshFilter = GameObject.Find("Plane").GetComponent<MeshFilter>();
-		unappliedMesh = meshFilter;
 		Mesh mesh = meshFilter.mesh;
         Vector3[] vertices = mesh.vertices;
         Color[] colors = new Color[vertices.Length];

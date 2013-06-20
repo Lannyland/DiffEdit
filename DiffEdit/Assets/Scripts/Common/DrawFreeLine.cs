@@ -8,7 +8,7 @@ public class DrawFreeLine : MonoBehaviour {
     public Material lineMaterial;
     public int maxPoints = 1000;
     public float lineWidth = 4.0f;
-    public int minPixelMove = 5;	// Must move at least this many pixels per sample for a new segment to be recorded
+    public int minPixelMove = 1;	// Must move at least this many pixels per sample for a new segment to be recorded
     public bool useEndCap = false;
     public Texture2D capTex;
     public Material capMaterial;
@@ -63,9 +63,9 @@ public class DrawFreeLine : MonoBehaviour {
         if (Input.GetMouseButtonUp(0))
         {
             // Paint line enclosed area
-            Debug.Log("I am here!");
+            Debug.Log("Mouse button released");
             PaintPolygon();
-            line.ZeroPoints();
+            //line.ZeroPoints();
         }
 	}
 
@@ -73,15 +73,17 @@ public class DrawFreeLine : MonoBehaviour {
     // Paint line enclosed area using the current brush color.
     private void PaintPolygon()
     {
+        Debug.Log("Let's do paint");
+
         // First create copy of line points
         Vector2[] polygonPoints = new Vector2[line.maxDrawIndex + 1];
         Array.Copy(linePoints, polygonPoints, line.maxDrawIndex + 1);
 
         // Convert screen coordinates to object local coordinates
-        for(int i=0; i<polygonPoints.Length; i++)
+        for (int i = 0; i < polygonPoints.Length; i++)
         {
-	        RaycastHit hit;
-	        Ray ray = Camera.main.ScreenPointToRay(linePoints[i]);
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(linePoints[i]);
             if (Physics.Raycast(ray, out hit, 100))
             {
                 // Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
@@ -92,14 +94,68 @@ public class DrawFreeLine : MonoBehaviour {
             }
         }
 
+        //// Create test line point set
+        //Vector2[] polygonPoints = new Vector2[3];
+        //polygonPoints[0] = new Vector2(-2, -2);
+        //polygonPoints[1] = new Vector2(0, 2);
+        //polygonPoints[2] = new Vector2(2, -2);
+
+        // Draw these line points to see what's going on.
+        Mesh mesh2 = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
+        Vector3[] vertices2 = mesh2.vertices;
+        Color[] colors2 = mesh2.colors;
+
+        // Let's first fix all the vertices x and z values
+        int index2 = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                vertices2[index2].x = j/10.0f-5.0f;
+                vertices2[index2].z = i/10.0f-5.0f;
+                index2++;
+            }
+        }
+        mesh2.vertices = vertices2;
+        mesh2.colors = colors2;
+        mesh2.RecalculateNormals();
+        mesh2.RecalculateBounds();
+
+        // Now draw polygon
+        for (int i = 0; i < polygonPoints.Length; i++)
+        {
+            int index = (int)Math.Round((polygonPoints[i].x + 5f) * 10) + (int)Math.Round((polygonPoints[i].y + 5f) * 10) * 100;
+            if (index > 9999)
+            {
+                index = 9999;
+            }
+            vertices2[index].y = 2;
+            colors2[index] = Color.red;
+        }
+        mesh2.vertices = vertices2;
+        mesh2.colors = colors2;
+        mesh2.RecalculateNormals();
+        mesh2.RecalculateBounds();
+
+        // Shift line point sets
+        Vector2 offset = new Vector2(10, 10);
+        for (int i = 0; i < polygonPoints.Length; i++)
+        {
+            polygonPoints[i] += offset;
+        }
+        Debug.Log("Line has " + polygonPoints.Length + " points");
+        
         // Paint enclosed area with default color
         Mesh mesh = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
-        Color[] colors = mesh.colors;
+        Color[] colors = mesh.colors;        
         for (int i = 0; i < vertices.Length; i++)
         {
-            if(Assets.Scripts.Common.MISCLib.PointInPolygon(new Vector2(vertices[i].x, vertices[i].z), polygonPoints))
+            Vector2 curVertex = new Vector2(vertices[i].x, vertices[i].z);
+
+            if (Assets.Scripts.Common.MISCLib.PointInPolygon(curVertex + offset, polygonPoints))
             {
+                Debug.Log("Point " + curVertex.ToString() + "inside polygon.");
                 Color c = Color.blue;
                 switch (Assets.Scripts.ProjectConstants.diffLevel)
                 {
@@ -113,7 +169,7 @@ public class DrawFreeLine : MonoBehaviour {
                         c = Color.red;
                         break;
                     default:
-                        break;                       
+                        break;
                 }
                 colors[i] = c;
                 vertices[i].y = Assets.Scripts.ProjectConstants.diffLevel - 1;

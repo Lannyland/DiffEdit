@@ -31,16 +31,15 @@ public class MyTwoFingerPan : MonoBehaviour
             case Gesture.GestureState.Began:
             case Gesture.GestureState.Changed:
                 var gesture = sender as TwoFingerPanGesture;
-                // GameObject.Find("GUIText").GetComponent<UILabel>().text = "Panning";
+                GameObject.Find("GUIText").GetComponent<UILabel>().text = "Panning";
 				pan = true;
 				// targetPosition = Camera.main.transform.localPosition - gesture.LocalDeltaPosition;
                 gestureInput = gesture.FingerPositionEnd - gesture.FingerPositionBegin;
-                // GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Now: " + gesture.FingerPositionEnd.ToString();
-                // GameObject.Find("GUIText").GetComponent<UILabel>().text = "Previous: " + gesture.FingerPositionBegin.ToString();
+                GameObject.Find("GUIText2").GetComponent<UILabel>().text = gestureInput.ToString();
                 break;	
 			case Gesture.GestureState.Ended:
 				pan = false;
-                // GameObject.Find("GUIText").GetComponent<UILabel>().text = "Stopped";
+                GameObject.Find("GUIText").GetComponent<UILabel>().text = "Stopped";
 				break;
 			
         }

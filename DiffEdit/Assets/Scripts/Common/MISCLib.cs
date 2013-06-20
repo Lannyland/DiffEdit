@@ -200,6 +200,7 @@ namespace Assets.Scripts.Common
         }
 
         // Method to see if a point is in a polygon
+        // IMPORTANT: Only works with positive numbers.
         public static bool PointInPolygon(Vector2 p, Vector2[] poly)
         {
             Vector2 p1, p2;
@@ -216,7 +217,7 @@ namespace Assets.Scripts.Common
             {
                 Vector2 newPoint = new Vector2(poly[i].x, poly[i].y);
 
-                if (newPoint.x > oldPoint.y)
+                if (newPoint.x > oldPoint.x)
                 {
                     p1 = oldPoint;
                     p2 = newPoint;
@@ -228,7 +229,7 @@ namespace Assets.Scripts.Common
                 }
 
                 if ((newPoint.x < p.x) == (p.x <= oldPoint.x) &&
-                   ((long)p.y - (long)p1.y) * (long)(p2.y - p1.y) < ((long)p2.y - (long)p1.y) * (long)(p.x - p1.x))
+                   (p.y - p1.y) * (p2.x - p1.x) < (p2.y - p1.y) * (p.x - p1.x))
                 {
                     inside = !inside;
                 }

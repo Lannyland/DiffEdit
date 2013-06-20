@@ -51,27 +51,37 @@ public class PaintSurface : MonoBehaviour {
 	void Update () {
 
 	    // When no button is pressed we update the mesh collider
-	    if (!Input.GetMouseButton (0))
-	    {
-            TimeT = 0;
-		    ApplyMeshCollider();
-		    return;
-	    }
-
-        // Delay mouse click so we can have two fingers gestures working simultaneously.
-        TimeT += Time.deltaTime;
-        if (Input.GetMouseButton(0) && TimeT < 0.5f)
+        // if (!Input.GetMouseButton(0) && GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 0)
+        if (!Input.GetMouseButton(0))
         {
+            TimeT = 0;
+            GameObject.Find("GUIText").GetComponent<UILabel>().text = "No mouse button pressed";
+            GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString();
+            ApplyMeshCollider();
             return;
         }
 
+        // Delay mouse click so we can have two fingers gestures working simultaneously.
+        TimeT += Time.deltaTime;
+        GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString(); 
+        //if ((Input.GetMouseButton(0) || GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount == 1) && TimeT < 0.5f)
+        if ((Input.GetMouseButton(0)) && TimeT < 0.5f)
+        {
+            GameObject.Find("GUIText").GetComponent<UILabel>().text = "Detecting paint mode";
+            return;
+        }
+
+        GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString();
         // Don't paint if there are two fingers
         if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 1)
         {
+            GameObject.Find("GUIText").GetComponent<UILabel>().text = "Two fingers detected";
             return;
         }
 
         // When mouse button is pressed
+        GameObject.Find("GUIText").GetComponent<UILabel>().text = "Paint mode detected";
+
         // First set brush size
         switch (fallOff)
 		{
@@ -122,7 +132,7 @@ public class PaintSurface : MonoBehaviour {
     {
         if (unappliedMesh && unappliedMesh.GetComponent<MeshCollider>())
         {
-            unappliedMesh.GetComponent<MeshCollider>().sharedMesh = null;
+            // unappliedMesh.GetComponent<MeshCollider>().sharedMesh = null;
             unappliedMesh.GetComponent<MeshCollider>().sharedMesh = unappliedMesh.mesh;
         }		
         unappliedMesh = null;
@@ -131,7 +141,7 @@ public class PaintSurface : MonoBehaviour {
     void DeformMesh(Mesh mesh, Vector3 position, float power, float inRadius)
     {
         Vector3[] vertices = mesh.vertices;
-        Vector3[] normals = mesh.normals;
+        // Vector3[] normals = mesh.normals;
         float sqrRadius = inRadius * inRadius;
         float sqrMagnitude, distance, falloff;
 

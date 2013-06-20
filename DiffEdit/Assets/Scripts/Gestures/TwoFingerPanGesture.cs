@@ -66,11 +66,6 @@ namespace TouchScript.Gestures
             var old2DPos2 = clusters.GetPreviousCenterPosition(Clusters2.CLUSTER2);
             var new2DPos1 = clusters.GetCenterPosition(Clusters2.CLUSTER1);
             var new2DPos2 = clusters.GetCenterPosition(Clusters2.CLUSTER2);
-            var old3DPos1 = ProjectionUtils.CameraToPlaneProjection(old2DPos1, projectionCamera, WorldTransformPlane);
-            var old3DPos2 = ProjectionUtils.CameraToPlaneProjection(old2DPos2, projectionCamera, WorldTransformPlane);
-            var new3DPos1 = ProjectionUtils.CameraToPlaneProjection(new2DPos1, projectionCamera, WorldTransformPlane);
-            var new3DPos2 = ProjectionUtils.CameraToPlaneProjection(new2DPos2, projectionCamera, WorldTransformPlane);
-            var newVector = new3DPos2 - new3DPos1;
 
             Vector2 oldCenter2DPos = (old2DPos1 + old2DPos2) * .5f;
             Vector2 newCenter2DPos = (new2DPos1 + new2DPos2) * .5f;

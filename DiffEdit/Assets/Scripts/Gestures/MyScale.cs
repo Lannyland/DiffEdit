@@ -33,7 +33,7 @@ public class MyScale : MonoBehaviour {
 	
 	private void onScaleStateChanged(object sender, GestureStateChangeEventArgs e)
     {
-        GameObject.Find("GUIText").GetComponent<UILabel>().text = "State changed.";
+        // GameObject.Find("GUIText").GetComponent<UILabel>().text = "State changed.";
 		switch (e.State)
         {
             case Gesture.GestureState.Began:
@@ -44,13 +44,13 @@ public class MyScale : MonoBehaviour {
                 //{
                 //    targetRotation = Quaternion.AngleAxis(gesture.LocalDeltaRotation, gesture.WorldTransformPlane.normal) * targetRotation;
                 //}
-                // GameObject.Find("GUIText").GetComponent<UILabel>().text = "Scaling";
+                GameObject.Find("GUIText").GetComponent<UILabel>().text = "Scaling";
 				scale = true;
 				speed = gesture.LocalDeltaScale;
 				break;
 			case Gesture.GestureState.Ended:
 				scale = false;
-                // GameObject.Find("GUIText").GetComponent<UILabel>().text = "Stopped";
+                GameObject.Find("GUIText").GetComponent<UILabel>().text = "Stopped";
 				break;
 		}
     }	
