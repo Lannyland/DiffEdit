@@ -100,49 +100,49 @@ public class DrawFreeLine : MonoBehaviour {
         //polygonPoints[1] = new Vector2(0, 2);
         //polygonPoints[2] = new Vector2(2, -2);
 
-        // Draw these line points to see what's going on.
-        Mesh mesh2 = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
-        Vector3[] vertices2 = mesh2.vertices;
-        Color[] colors2 = mesh2.colors;
+        //// Draw these line points to see what's going on.
+        //Mesh mesh2 = GameObject.Find("Plane").GetComponent<MeshFilter>().mesh;
+        //Vector3[] vertices2 = mesh2.vertices;
+        //Color[] colors2 = mesh2.colors;
 
-        // Let's first fix all the vertices x and z values
-        int index2 = 0;
-        for (int i = 0; i < 100; i++)
-        {
-            for (int j = 0; j < 100; j++)
-            {
-                vertices2[index2].x = j/10.0f-5.0f;
-                vertices2[index2].z = i/10.0f-5.0f;
-                index2++;
-            }
-        }
-        mesh2.vertices = vertices2;
-        mesh2.colors = colors2;
-        mesh2.RecalculateNormals();
-        mesh2.RecalculateBounds();
+        //// Let's first fix all the vertices x and z values
+        //int index2 = 0;
+        //for (int i = 0; i < 100; i++)
+        //{
+        //    for (int j = 0; j < 100; j++)
+        //    {
+        //        vertices2[index2].x = j/10.0f-5.0f;
+        //        vertices2[index2].z = i/10.0f-5.0f;
+        //        index2++;
+        //    }
+        //}
+        //mesh2.vertices = vertices2;
+        //mesh2.colors = colors2;
+        //mesh2.RecalculateNormals();
+        //mesh2.RecalculateBounds();
 
-        // Now draw polygon
-        for (int i = 0; i < polygonPoints.Length; i++)
-        {
-            int index = (int)Math.Round((polygonPoints[i].x + 5f) * 10) + (int)Math.Round((polygonPoints[i].y + 5f) * 10) * 100;
-            if (index > 9999)
-            {
-                index = 9999;
-            }
-            vertices2[index].y = 2;
-            colors2[index] = Color.red;
-        }
-        mesh2.vertices = vertices2;
-        mesh2.colors = colors2;
-        mesh2.RecalculateNormals();
-        mesh2.RecalculateBounds();
+        //// Now draw polygon
+        //for (int i = 0; i < polygonPoints.Length; i++)
+        //{
+        //    int index = (int)Math.Round((polygonPoints[i].x + 5f) * 10) + (int)Math.Round((polygonPoints[i].y + 5f) * 10) * 100;
+        //    if (index > 9999)
+        //    {
+        //        index = 9999;
+        //    }
+        //    vertices2[index].y = 2;
+        //    colors2[index] = Color.red;
+        //}
+        //mesh2.vertices = vertices2;
+        //mesh2.colors = colors2;
+        //mesh2.RecalculateNormals();
+        //mesh2.RecalculateBounds();
 
         // Shift line point sets
-        Vector2 offset = new Vector2(10, 10);
-        for (int i = 0; i < polygonPoints.Length; i++)
-        {
-            polygonPoints[i] += offset;
-        }
+        //Vector2 offset = new Vector2(10, 10);
+        //for (int i = 0; i < polygonPoints.Length; i++)
+        //{
+        //    polygonPoints[i] += offset;
+        //}
         Debug.Log("Line has " + polygonPoints.Length + " points");
         
         // Paint enclosed area with default color
@@ -153,7 +153,7 @@ public class DrawFreeLine : MonoBehaviour {
         {
             Vector2 curVertex = new Vector2(vertices[i].x, vertices[i].z);
 
-            if (Assets.Scripts.Common.MISCLib.PointInPolygon(curVertex + offset, polygonPoints))
+            if (Assets.Scripts.Common.MISCLib.PointInPolygon(curVertex, polygonPoints))
             {
                 Debug.Log("Point " + curVertex.ToString() + "inside polygon.");
                 Color c = Color.blue;
@@ -179,5 +179,10 @@ public class DrawFreeLine : MonoBehaviour {
         mesh.colors = colors;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+
+        // Next get rid of the line on screen
+        line.ZeroPoints();
+        line.minDrawIndex = 0;
+        line.Draw();
     }
 }
