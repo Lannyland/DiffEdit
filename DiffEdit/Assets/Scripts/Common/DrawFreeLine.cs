@@ -164,7 +164,7 @@ public class DrawFreeLine : MonoBehaviour {
 
             if (Assets.Scripts.Common.MISCLib.PointInPolygon(curVertex, polygonPoints))
             {
-                Debug.Log("Point " + curVertex.ToString() + "inside polygon.");
+                // Debug.Log("Point " + curVertex.ToString() + "inside polygon.");
                 Color c = Color.blue;
                 switch (Assets.Scripts.ProjectConstants.diffLevel)
                 {
