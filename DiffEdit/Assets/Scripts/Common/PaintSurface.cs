@@ -50,21 +50,32 @@ public class PaintSurface : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // Don't paint if there are two fingers
+        GameObject.Find("GUIText3").GetComponent<UILabel>().text = "Touches: " + GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount.ToString();
+        if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 1)
+        {
+            GameObject.Find("GUIText3").GetComponent<UILabel>().text = "Multiple fingers detected";
+            return;
+        }
+
 	    // When no button is pressed we update the mesh collider
-        // if (!Input.GetMouseButton(0) && GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 0)
         if (!Input.GetMouseButton(0))
         {
             TimeT = 0;
-            GameObject.Find("GUIText").GetComponent<UILabel>().text = "No mouse button pressed";
-            GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString();
+            //GameObject.Find("GUIText").GetComponent<UILabel>().text = "No mouse button pressed";
+            //GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString();
             ApplyMeshCollider();
             return;
+        }
+
+        if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount == 1)
+        {
+            GameObject.Find("GUIText3").GetComponent<UILabel>().text = "One finger detected";
         }
 
         // Delay mouse click so we can have two fingers gestures working simultaneously.
         TimeT += Time.deltaTime;
         GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString(); 
-        //if ((Input.GetMouseButton(0) || GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount == 1) && TimeT < 0.5f)
         if ((Input.GetMouseButton(0)) && TimeT < 0.5f)
         {
             GameObject.Find("GUIText").GetComponent<UILabel>().text = "Detecting paint mode";
@@ -72,12 +83,6 @@ public class PaintSurface : MonoBehaviour {
         }
 
         GameObject.Find("GUIText2").GetComponent<UILabel>().text = "Click delay: " + TimeT.ToString();
-        // Don't paint if there are two fingers
-        if (GameObject.Find("TouchScript").GetComponent<TouchManager>().TouchesCount > 1)
-        {
-            GameObject.Find("GUIText").GetComponent<UILabel>().text = "Two fingers detected";
-            return;
-        }
 
         // When mouse button is pressed
         GameObject.Find("GUIText").GetComponent<UILabel>().text = "Paint mode detected";

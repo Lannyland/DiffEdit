@@ -33,7 +33,7 @@ public class MyScale : MonoBehaviour {
 	
 	private void onScaleStateChanged(object sender, GestureStateChangeEventArgs e)
     {
-        // GameObject.Find("GUIText").GetComponent<UILabel>().text = "State changed.";
+        //GameObject.Find("GUIText").GetComponent<UILabel>().text = "State changed.";
 		switch (e.State)
         {
             case Gesture.GestureState.Began:
