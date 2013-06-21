@@ -9,5 +9,5 @@ Vectrosity Unity4 -- For drawing lines
 Know issues:
 
 1. Using finger gesture sometimes activating paint mode (by holding down for half a second) doesn't work very well.
-2. When using the select mode to draw lines, don't draw ouside of the terrain. Weird things will happen.
+2. When using the select mode to draw lines, don't draw outside of the terrain. Weird things will happen.
 3. Finger gestures only work on the plane, meaning you have to start by touching the plane first. If you start the gesture outside it will not work.
