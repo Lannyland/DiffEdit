@@ -41,13 +41,15 @@ public class StartUpChores : MonoBehaviour {
 	    yield return www;
 	
 	    // Stored loaded texture to a material in material catelog
-		if(www.isDone && www !=null)
+		if(www.isDone && www.error == null)
 		{
+			Debug.Log("Terrain image loaded correctly.");
 			go.GetComponent<MaterialCatelog>().catelog[4].mainTexture = www.texture;
 		}
 		else
 		{
-			Debug.Log("Error loading file.");
+			Debug.Log("Error loading file. Use default.");
+			go.GetComponent<MaterialCatelog>().catelog[4].mainTexture = go.GetComponent<MaterialCatelog>().catelog[5].mainTexture;			
 		}
     }
 

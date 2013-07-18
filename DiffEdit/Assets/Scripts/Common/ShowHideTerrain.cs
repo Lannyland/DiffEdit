@@ -20,8 +20,8 @@ public class ShowHideTerrain : MonoBehaviour {
 		// Then change material on plane to show or hide terrain image		
         UILabel label = GameObject.Find("lblShowTerrain").GetComponent<UILabel>(); 
 		GameObject go = GameObject.Find("MaterialHolder");
-		MeshFilter mf = GameObject.Find("Plane").GetComponent<MeshFilter>();			
-
+		MeshFilter mf = GameObject.Find("Plane").GetComponent<MeshFilter>();					
+		
         if (label.text == "Show Terrain")
         {
             label.text = "Hide Terrain";
