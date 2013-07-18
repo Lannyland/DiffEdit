@@ -35,7 +35,7 @@ public class MyTwoFingerPan : MonoBehaviour
 				pan = true;
 				// targetPosition = Camera.main.transform.localPosition - gesture.LocalDeltaPosition;
                 gestureInput = gesture.FingerPositionEnd - gesture.FingerPositionBegin;
-                GameObject.Find("GUIText2").GetComponent<UILabel>().text = gestureInput.ToString();
+                //GameObject.Find("GUIText2").GetComponent<UILabel>().text = gestureInput.ToString();
                 break;	
 			case Gesture.GestureState.Ended:
 				pan = false;

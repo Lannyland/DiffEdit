@@ -31,7 +31,7 @@ public class StartUpChores : MonoBehaviour {
 		
 		// Deal with web vs. local files
 		string fileLoc = ProjectConstants.strTerrainImage;
-		if(fileLoc.Substring(0, 7) != "http://")
+		if(fileLoc.Length>6 && fileLoc.Substring(0, 7) != "http://")
 		{
 			fileLoc = @"file:///" + fileLoc;				
 		}
